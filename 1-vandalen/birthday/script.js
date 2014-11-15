@@ -5,9 +5,23 @@ window.onload = function(){
 	
 	var birthday = function(date){
 		
-
+			console.log(date);
 
 			// Din kod här.
+			
+			var birthday = new Date(date);
+			var myDate = new Date();
+			
+			
+			if(myDate.getTime() < birthday.getTime())
+			{
+				return (birthday.getMilliseconds()-myDate.getMilliseconds());//*(1000*60*60*24);
+			}
+			
+			//console.log(date.getMilliseconds());
+			//console.log(myDate.getMilliseconds());
+			
+			return birthday.getDay() - myDate.getDay();
 
 
 

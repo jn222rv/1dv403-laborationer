@@ -8,12 +8,31 @@ window.onload = function(){
 		// Returnera den konverterade strängen.
 		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
 	
-
-
-
-
-
-
+		var newStr;
+		
+		for(var i = 0; i < str.length;i++)
+		{
+			newStr = str.slice(0,i);
+			
+			if(str[i] == "a" || str[i] === "A")
+			{
+				newStr += "#";
+			}
+			else if(str[i] === str[i].toUpperCase())
+			{
+				newStr += str[i].toLowerCase();
+			}
+			else if(str[i] === str[i].toLowerCase())
+			{
+				newStr += str[i].toUpperCase();
+			}
+			
+			newStr += str.slice(i+1);
+			
+			str = newStr;
+		}
+		
+		return str;
 	};
 	// ------------------------------------------------------------------------------
 

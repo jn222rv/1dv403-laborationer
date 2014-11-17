@@ -9,23 +9,45 @@ window.onload = function(){
 
 			// Din kod här.
 			
-			var birthday = new Date(date);
-			var myDate = new Date();
-			
-			
-			if(myDate.getTime() < birthday.getTime())
-			{
-				return (birthday.getMilliseconds()-myDate.getMilliseconds());//*(1000*60*60*24);
+			function toDays(value){
+				return Math.round(value/1000/60/60/24)+1;
 			}
 			
-			//console.log(date.getMilliseconds());
-			//console.log(myDate.getMilliseconds());
+			function UserException(message) {
+			   this.message = message;
+			   this.name = "UserException";
+			}
 			
-			return birthday.getDay() - myDate.getDay();
-
-
-
-
+			var birthday = new Date(date);
+			var currentDate = new Date();
+			var days;
+			
+			
+			if(isNaN(birthday.getDay()))
+			{
+				throw new UserException("No month mentioned");
+			}
+			else if(isNaN(birthday.getMonth()))
+			{
+				throw new UserException("No day mentioned");
+			}
+			else if(isNaN(birthday.getYear()))
+			{
+				throw new UserException("No year mentioned");
+			}
+			else
+			{
+				if(birthday.getTime() - currentDate.getTime() < 0)
+				{
+					birthday.setFullYear(birthday.getFullYear()+1);
+				}
+				
+				days = birthday.getTime() - currentDate.getTime();
+				days = toDays(days);
+			}
+			
+			
+			return days;
 	};
 	// ------------------------------------------------------------------------------
 

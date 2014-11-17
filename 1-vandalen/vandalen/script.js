@@ -3,7 +3,27 @@
 var makePerson = function(persArr){
 
 
-	//console.log(persArr);
+    for(var i = 0; i < persArr.length; i++)
+    {
+        if(persArr[i].hasOwnProperty("age"))
+        {
+            if(typeof persArr[i].age != "number")
+            {
+                persArr[i].age = 0;
+            }
+        }
+        else if(persArr[i].hasOwnProperty("born"))
+        {
+            if(typeof persArr[i].born != "string")
+            {
+                persArr[i].born = "2004-11-23";
+            }
+        }
+        if(typeof persArr[i].name != "string")
+        {
+            persArr[i].name = "John Doe";
+        }
+    }
     
     var number = 0;
     var namesArr = [];
@@ -44,7 +64,7 @@ var makePerson = function(persArr){
     newObj.averageAge = Math.round(number/persArr.length);
     newObj.names = namesArr.join(', ');
     
-    console.log(newObj.names);
+    console.log(newObj);
     
     return newObj;
 }

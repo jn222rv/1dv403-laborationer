@@ -18,6 +18,25 @@ var makePerson = function(persArr){
             {
                 persArr[i].born = "2004-11-23";
             }
+            
+            var date = new Date();
+            var year = +persArr[i].born.slice(0,4);
+            var month = +persArr[i].born.slice(5,7);
+            var day = +persArr[i].born.slice(8);
+            
+            if(date.getMonth()+1<month)
+            {
+                year += 1;
+            }
+            else if(date.getMonth()+1===month)
+            {
+                if(date.getDate()>day)
+                {
+                    year+=1;
+                }
+            }
+            
+            persArr[i].age = date.getFullYear()-year;
         }
         if(typeof persArr[i].name != "string")
         {
@@ -35,37 +54,42 @@ var makePerson = function(persArr){
         names: ""
     };
     
-    var compareFun = function compareNumbers(a,b) {
+    var compareNum = function compareNumbers(a,b) {
         return a.age - b.age;
     }
     
-    var test = function testFun(element, index, array) {
+    var compareName = function compareNames(a,b) {
+        return a.localeCompare(b, 'sv');
+    }
+    
+    var totalNum = function numberFun(element, index, array) {
         number += array[index].age;
     }
     
-    var nameTest = function nameFun(element, index, array) {
+    var nameArr = function nameFun(element, index, array) {
         namesArr.push(array[index].name);
     } 
     
-    var compareName = function othercompareFun(a,b) {
-        return a.localeCompare(b);
-    }
     
+    persArr.forEach(totalNum);
+    persArr.forEach(nameArr);
     
-    persArr.forEach(test);
-    persArr.forEach(nameTest);
-    
-    persArr.sort(compareFun);
-    
+    persArr.sort(compareNum);
     namesArr.sort(compareName);
     
     newObj.minAge = persArr[0].age;
-    newObj.maxAge = persArr[(persArr.length)-1].age
+    newObj.maxAge = persArr[(persArr.length)-1].age;
     newObj.averageAge = Math.round(number/persArr.length);
     newObj.names = namesArr.join(', ');
-    
-    console.log(newObj);
     
     return newObj;
 }
 
+
+
+
+var data = [{name: "John Häggerud", age: 52}, {name: "Johan Leitet", age: 36}, {name: "Mats Loock", age: 46}, {name:"Jonathan Nilsson", born: "1993-08-28"}];
+
+var result = makePerson(data);
+
+console.log(result);

@@ -13,11 +13,9 @@ window.onload = function(){
 		   this.name = "UserException";
 		}
 		
-		console.log(typeof str);
-		
 		if(!/\S/.test(str))
 		{
-			throw new UserException("Skriv någonting");
+			throw new UserException("Skriv någonting.");
 		}
 		else
 		{
@@ -45,7 +43,6 @@ window.onload = function(){
 				str = newStr;
 			}
 		}
-			
 		
 		return str;
 	};

@@ -22,30 +22,24 @@ window.onload = function(){
 			var currentDate = new Date();
 			var days;
 			
+			console.log(birthday.getDate());
 			
-			if(isNaN(birthday.getDay()))
+			if(isNaN(birthday.getDate()))
 			{
-				throw new UserException("No month mentioned");
-			}
-			else if(isNaN(birthday.getMonth()))
-			{
-				throw new UserException("No day mentioned");
-			}
-			else if(isNaN(birthday.getYear()))
-			{
-				throw new UserException("No year mentioned");
+				throw new UserException("Either a day, month or year have not been selected or the date is not correct");
 			}
 			else
 			{
-				if(birthday.getTime() - currentDate.getTime() < 0)
+				if(birthday.getFullYear()<currentDate.getFullYear())
 				{
-					birthday.setFullYear(birthday.getFullYear()+1);
+					birthday.setFullYear(currentDate.getFullYear());	
 				}
-				
-				days = birthday.getTime() - currentDate.getTime();
-				days = toDays(days);
+				if(toDays(birthday.getTime() - currentDate.getTime()) < 0)
+				{
+					birthday.setFullYear(currentDate.getFullYear()+1);
+				}
+				days = toDays(birthday.getTime() - currentDate.getTime());
 			}
-			
 			
 			return days;
 	};

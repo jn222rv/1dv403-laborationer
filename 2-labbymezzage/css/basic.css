@@ -1,0 +1,15 @@
+div {
+    width:500px;
+    margin:0px auto;
+    border:1px solid black;
+}
+
+h3 {
+    display:block;
+    margin:0px auto;
+}
+
+input {
+    display:block;
+    margin:0px auto;
+}

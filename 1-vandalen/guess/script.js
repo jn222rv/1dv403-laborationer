@@ -11,23 +11,27 @@ window.onload = function(){
 		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
 			
-		console.log("Antal gissningar: "+numberOfGuesses);
-			
 		// Plats för förändring.
 		
 		numberOfGuesses += 1;
 		
-		if(number < 1 || number > 100)
+		if(isNaN(number))
 		{
-			return [false,"Det gissade talet ligger utanför intervallet"];
+			numberOfGuesses -= 1;
+			return [false, "Det är ju inte ens ett nummer, testa igen."]
+		}
+		else if(number < 1 || number > 100)
+		{
+			numberOfGuesses -= 1;
+			return [false,"Det gissade talet ligger utanför intervallet, testa igen."];
 		}
 		else if(number < secret)
 		{
-			return [false,"Det hemliga talet är mer"];
+			return [false,"Det hemliga talet är större."];
 		}
 		else if(number > secret)
 		{
-			return [false,"Det hemliga talet är mindre"];
+			return [false,"Det hemliga talet är mindre."];
 		}
 		else
 		{

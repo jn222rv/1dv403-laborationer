@@ -2,14 +2,14 @@ div {
     width:500px;
     margin:0px auto;
     border:1px solid black;
+    text-align:center;
 }
 
 h3 {
-    display:block;
-    margin:0px auto;
+    color:#4C8AFF;
 }
 
 input {
     display:block;
-    margin:0px auto;
+    margin:20px auto;
 }

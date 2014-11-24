@@ -10,4 +10,17 @@ function Message(message,date){
         message = _text;
     }
     
+    this.getDate = function(){
+        return date;
+    }
+    
+    this.setDate = function(_date){
+        date = _date;
+    }
+    
 };
+
+Message.prototype.getDateText = function(){
+    var date = this.getDate();
+    return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+}

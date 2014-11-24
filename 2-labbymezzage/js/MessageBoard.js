@@ -16,16 +16,25 @@ var MessageBoard = {
             
             if(/\S/.test(text.value))
             {
-                
-                MessageBoard.messages.push(text.value);
-                
-                console.log(MessageBoard.messages);
+                var newMessage = new Message(text.value,new Date());
+                MessageBoard.messages.push(newMessage);
                 
                 var newElement = document.createElement("p");
+                var dateElement = document.createElement("p");
+                var divElement = document.createElement("div");
                 var div = document.getElementById("messageArea");
                 
-                newElement.appendChild(document.createTextNode(MessageBoard.messages[MessageBoard.messages.length-1]));
-                div.appendChild(newElement);
+                dateElement.className = "date";
+                
+                var currentMessage = MessageBoard.messages[MessageBoard.messages.length-1];
+                
+                newElement.appendChild(document.createTextNode(MessageBoard.messages[MessageBoard.messages.length-1].getText()));
+                dateElement.appendChild(document.createTextNode(MessageBoard.messages[MessageBoard.messages.length-1].getDateText()));
+                divElement.appendChild(newElement);
+                divElement.appendChild(dateElement);
+                divElement.className = "message";
+                
+                div.appendChild(divElement);
                 
                 document.innerHTML = div;
                 

@@ -10,48 +10,96 @@ var MessageBoard = {
          
         var node = document.querySelector("#button");
         
-        node.addEventListener("click", function(){
-                
-            var text = node.parentNode.querySelector("input");   
-            
-            if(/\S/.test(text.value))
+        var textField = node.parentNode.querySelector("input");
+        
+        var addMessage = function(){
+             
+            if(/\S/.test(textField.value))
             {
-                var newMessage = new Message(text.value,new Date());
+                var newMessage = new Message(textField.value,new Date());
                 MessageBoard.messages.push(newMessage);
                 
-                var newElement = document.createElement("p");
-                var dateElement = document.createElement("p");
-                var divElement = document.createElement("div");
-                var div = document.getElementById("messageArea");
-                
-                dateElement.className = "date";
-                
-                var currentMessage = MessageBoard.messages[MessageBoard.messages.length-1];
-                
-                newElement.appendChild(document.createTextNode(MessageBoard.messages[MessageBoard.messages.length-1].getText()));
-                dateElement.appendChild(document.createTextNode(MessageBoard.messages[MessageBoard.messages.length-1].getDateText()));
-                divElement.appendChild(newElement);
-                divElement.appendChild(dateElement);
-                divElement.className = "message";
-                
-                div.appendChild(divElement);
-                
-                document.innerHTML = div;
-                
-                MessageBoard.numberOfMessages += 1;
-                MessageBoard.increment();
+                MessageBoard.renderMessages();
             }
             
+        };
+        
+        textField.addEventListener("keypress",function(e){
+             if(!e) e = window.event;
+             
+             if(e.keyCode===13)
+             {
+                 addMessage();
+             }
         });
         
-        MessageBoard.increment();
+        node.addEventListener("click", addMessage);
+        
+        MessageBoard.renderNumberOfMessages();
                 
         console.log("init() is done");
     },
     
-    increment:function(){
+    renderNumberOfMessages:function(){
         var numberDiv = document.querySelector("#numberOfMessages p");
         numberDiv.innerHTML = "Antal meddelanden: "+MessageBoard.numberOfMessages;
+    },
+    
+    renderMessages: function(){
+        document.getElementById("messageArea").innerHTML = "";
+        
+        for(var i = 0; i < MessageBoard.messages.length; i++)
+        {
+            MessageBoard.renderMessage(i);
+        }
+        
+        MessageBoard.numberOfMessages = MessageBoard.messages.length;
+        MessageBoard.renderNumberOfMessages();
+    },
+    
+    renderMessage: function(messageID){
+        
+        var div = document.getElementById("messageArea");
+        var p = document.createElement("p");
+        var date = document.createElement("p");
+        var newDiv = document.createElement("div");
+        var closeImg = document.createElement("img");
+        var timeImg = document.createElement("img");
+        
+        closeImg.alt="Close";
+        closeImg.setAttribute("src","img/close.jpg");
+        closeImg.addEventListener("click",function(){
+            MessageBoard.removeMessages(messageID);
+        });
+        
+        timeImg.alt="Time";
+        timeImg.setAttribute("src","img/time.jpg");
+        timeImg.addEventListener("click",function(){
+            alert("Inlägget skapades "+MessageBoard.messages[messageID].getDateText()+" klockan "+MessageBoard.messages[messageID].getTimeText());
+        });
+        
+        
+        newDiv.appendChild(closeImg);
+        newDiv.appendChild(timeImg);
+        
+        
+        newDiv.className = "message";
+        
+        p.appendChild(document.createTextNode(MessageBoard.messages[messageID].getText()));
+        newDiv.appendChild(p);
+        
+        
+        date.appendChild(document.createTextNode(MessageBoard.messages[messageID].getTimeText()));
+        newDiv.appendChild(date);
+        
+        date.className = "date";
+        
+        div.appendChild(newDiv);
+    },
+    
+    removeMessages: function(messageID){
+        MessageBoard.messages.splice(messageID,1);
+        MessageBoard.renderMessages();
     }
 }
 

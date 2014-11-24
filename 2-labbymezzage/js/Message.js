@@ -20,7 +20,15 @@ function Message(message,date){
     
 };
 
-Message.prototype.getDateText = function(){
+Message.prototype.getTimeText = function(){
     var date = this.getDate();
     return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
-}
+};
+
+Message.prototype.getDateText = function(){
+    var date = this.getDate();
+    
+    var months = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"];
+    
+    return "den "+date.getDate()+" "+months[date.getMonth()]+" "+date.getFullYear();
+};

@@ -38,6 +38,7 @@ p {
     width:100%;
     padding:5px;
     padding-top:20px;
+    text-align:left;
 }
 
 p.date {
@@ -47,7 +48,14 @@ p.date {
 }
 
 img {
-    width:10px;
-    height:10px;
+    width:15px;
+    height:15px;
+    margin-left:5px;
     float:right;
+}
+
+#textArea {
+    width:60%;
+    font: normal 14px Times;
+    resize: none;
 }

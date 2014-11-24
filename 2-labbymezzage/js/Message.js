@@ -17,7 +17,6 @@ function Message(message,date){
     this.setDate = function(_date){
         date = _date;
     }
-    
 };
 
 Message.prototype.getTimeText = function(){
@@ -31,4 +30,12 @@ Message.prototype.getDateText = function(){
     var months = ["januari","februari","mars","april","maj","juni","juli","augusti","september","oktober","november","december"];
     
     return "den "+date.getDate()+" "+months[date.getMonth()]+" "+date.getFullYear();
+};
+
+Message.prototype.getHTMLText = function(){
+    var currentMessage = this.getText();
+    
+    console.log(currentMessage.replace(/[\n\r]/g, "<br/>"));
+    
+    return currentMessage.replace(/[\n\r]/g, "<br>");
 };

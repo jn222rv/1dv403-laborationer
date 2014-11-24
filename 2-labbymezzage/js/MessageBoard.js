@@ -10,26 +10,29 @@ var MessageBoard = {
          
         var node = document.querySelector("#button");
         
-        var textField = node.parentNode.querySelector("input");
+        var textField = node.parentNode.querySelector("#textArea");
         
         var addMessage = function(){
              
             if(/\S/.test(textField.value))
             {
+                console.log(textField.value);
                 var newMessage = new Message(textField.value,new Date());
                 MessageBoard.messages.push(newMessage);
                 
                 MessageBoard.renderMessages();
             }
             
+            textField.value = "";
         };
         
         textField.addEventListener("keypress",function(e){
              if(!e) e = window.event;
              
-             if(e.keyCode===13)
+             if(e.keyCode===13&&!(e.keyCode===13&&e.shiftKey))
              {
                  addMessage();
+                 textField.blur();
              }
         });
         
@@ -67,13 +70,16 @@ var MessageBoard = {
         var timeImg = document.createElement("img");
         
         closeImg.alt="Close";
-        closeImg.setAttribute("src","img/close.jpg");
+        closeImg.setAttribute("src","img/close.png");
         closeImg.addEventListener("click",function(){
-            MessageBoard.removeMessages(messageID);
+            if(window.confirm("Vill du verkligen ta bort detta meddelande?"))
+            {
+                MessageBoard.removeMessages(messageID);
+            }
         });
         
         timeImg.alt="Time";
-        timeImg.setAttribute("src","img/time.jpg");
+        timeImg.setAttribute("src","img/time.png");
         timeImg.addEventListener("click",function(){
             alert("Inlägget skapades "+MessageBoard.messages[messageID].getDateText()+" klockan "+MessageBoard.messages[messageID].getTimeText());
         });
@@ -85,7 +91,13 @@ var MessageBoard = {
         
         newDiv.className = "message";
         
-        p.appendChild(document.createTextNode(MessageBoard.messages[messageID].getText()));
+        console.log(MessageBoard.messages[messageID].getHTMLText());
+        
+        //p.appendChild(document.createTextNode(MessageBoard.messages[messageID].getHTMLText()));
+        p.innerHTML = MessageBoard.messages[messageID].getHTMLText();
+        
+        console.log(p.innerHTML);
+        
         newDiv.appendChild(p);
         
         

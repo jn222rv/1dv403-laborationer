@@ -1,8 +1,11 @@
 div {
     width:500px;
     margin:0px auto;
-    border:1px solid black;
     text-align:center;
+}
+
+#main {
+    border:1px solid black;
 }
 
 h3 {
@@ -12,4 +15,18 @@ h3 {
 input {
     display:block;
     margin:20px auto;
+}
+
+#messageArea {
+    background-color:#3C5EEF;
+    width:70%;
+}
+
+p {
+    padding:10px;
+    background-color:#1111FF;
+}
+
+#main #numberOfMessages {
+    background-color:#000000;
 }

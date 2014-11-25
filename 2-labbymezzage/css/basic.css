@@ -1,17 +1,23 @@
+body {
+    background-color:#A4D3EE;
+}
+
 div {
     width:500px;
     margin:0px auto;
     text-align:center;
 }
 
-#main {
-    border:1px solid black;
-    background-color:#CA9BFF;
-    padding:5px;
+h1 {
+    text-align:center;
 }
 
-h3 {
-    color:#4C8AFF;
+#main {
+    background-image:url("img/logoImg.png");
+    border:1px solid black;
+    background-color:#E0EEE0;
+    padding:5px;
+    padding-top:10px;
 }
 
 input {
@@ -20,7 +26,7 @@ input {
 }
 
 #messageArea {
-    width:70%;
+    width:100%;
 }
 
 p {
@@ -33,12 +39,18 @@ p {
 }
 
 #messageArea .message {
-    background-color:#FFFF00;
+    background-color:#CDC673;
     margin-top:5px;
-    width:100%;
-    padding:5px;
+    width:90%;
+    padding:15px;
     padding-top:20px;
     text-align:left;
+    border:1px solid;
+    word-break:break-all;
+}
+
+#messageArea .message:first-child {
+    margin-top:0px;
 }
 
 p.date {
@@ -47,15 +59,22 @@ p.date {
     font-size:12px;
 }
 
-img {
+img.basicImg {
     width:15px;
     height:15px;
     margin-left:5px;
     float:right;
 }
 
+img#logoImg {
+    width:500px;
+    height:100px;
+    margin:0px auto;
+}
+
 #textArea {
-    width:60%;
+    width:80%;
     font: normal 14px Times;
     resize: none;
+    background-color:#F0FFFF;
 }

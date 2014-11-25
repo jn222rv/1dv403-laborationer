@@ -20,8 +20,12 @@ function Message(message,date){
 };
 
 Message.prototype.getTimeText = function(){
-    var date = this.getDate();
-    return date.getHours()+":"+date.getMinutes()+":"+date.getSeconds();
+    var d = this.getDate();
+    var dateText = d.toTimeString();
+    
+    dateText = dateText.split(' ')[0];
+    
+    return dateText;
 };
 
 Message.prototype.getDateText = function(){
@@ -34,8 +38,6 @@ Message.prototype.getDateText = function(){
 
 Message.prototype.getHTMLText = function(){
     var currentMessage = this.getText();
-    
-    console.log(currentMessage.replace(/[\n\r]/g, "<br/>"));
     
     return currentMessage.replace(/[\n\r]/g, "<br>");
 };

@@ -32,15 +32,13 @@ var MessageBoard = {
              if(e.keyCode===13&&!(e.keyCode===13&&e.shiftKey))
              {
                  addMessage();
-                 textField.blur();
+                 e.preventDefault();
              }
         });
         
         node.addEventListener("click", addMessage);
         
         MessageBoard.renderNumberOfMessages();
-                
-        console.log("init() is done");
     },
     
     renderNumberOfMessages:function(){
@@ -71,6 +69,7 @@ var MessageBoard = {
         
         closeImg.alt="Close";
         closeImg.setAttribute("src","img/close.png");
+        closeImg.className = "basicImg";
         closeImg.addEventListener("click",function(){
             if(window.confirm("Vill du verkligen ta bort detta meddelande?"))
             {
@@ -80,6 +79,7 @@ var MessageBoard = {
         
         timeImg.alt="Time";
         timeImg.setAttribute("src","img/time.png");
+        timeImg.className = "basicImg";
         timeImg.addEventListener("click",function(){
             alert("Inlägget skapades "+MessageBoard.messages[messageID].getDateText()+" klockan "+MessageBoard.messages[messageID].getTimeText());
         });
@@ -87,23 +87,14 @@ var MessageBoard = {
         
         newDiv.appendChild(closeImg);
         newDiv.appendChild(timeImg);
-        
-        
         newDiv.className = "message";
         
-        console.log(MessageBoard.messages[messageID].getHTMLText());
-        
-        //p.appendChild(document.createTextNode(MessageBoard.messages[messageID].getHTMLText()));
         p.innerHTML = MessageBoard.messages[messageID].getHTMLText();
-        
-        console.log(p.innerHTML);
-        
         newDiv.appendChild(p);
         
         
         date.appendChild(document.createTextNode(MessageBoard.messages[messageID].getTimeText()));
         newDiv.appendChild(date);
-        
         date.className = "date";
         
         div.appendChild(newDiv);

@@ -3,14 +3,44 @@
 var MemoryGame = {
     
     array: [],
+    row: 4,
+    column: 3,
     
     init: function(e){
         
-        MemoryGame.array = RandomGenerator.getPictureArray(2,2);
+        MemoryGame.array = RandomGenerator.getPictureArray(MemoryGame.row,MemoryGame.column);
         
-        //MemoryGame.random = new MemoryGame.RandomGenerator();
-        //MemoryGame.array = MemoryGame.random.getPictureArray(2,2);
         console.log(MemoryGame.array);
+        
+        MemoryGame.createTable();
+    },
+    
+    createTable: function(){
+        var div = document.querySelector("#table");
+        console.log(div);
+        
+        var table = document.createElement("table");
+        
+        for(var i = 0; i < MemoryGame.row; i++)
+        {
+            var tr = document.createElement("tr");
+            
+            for(var j = 0; j < MemoryGame.column; j++)
+            {
+                var data = document.createElement("td");
+                var img = document.createElement("img");
+                
+                img.setAttribute("src","pics/0.png");
+                
+                data.appendChild(img);
+                
+                tr.appendChild(data);
+            }
+            
+            table.appendChild(tr);
+        }
+        
+        div.appendChild(table);
     }
 }
 

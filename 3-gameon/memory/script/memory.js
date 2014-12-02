@@ -76,7 +76,6 @@ var MemoryGame = {
         if(node.nodeName === "A")
         {
             node = node.firstChild;
-            console.log("dis is A");
         }
                 
         if(node.nodeName === "IMG")
@@ -138,7 +137,7 @@ var MemoryGame = {
     
     unflipCards: function(){
         
-        for(var i = 0;i < 2;i++)
+        for(var i = 0;i < MemoryGame.flippedArr.length;i++)
         {
             var node = MemoryGame.flippedArr[i];
             node.className = "hidden";

@@ -3,8 +3,8 @@
 var MemoryGame = {
     
     array: [],
-    row: 2,
-    col: 3,
+    row: 4,
+    col: 4,
     cardsFlipped: 0,
     flippedArr: [],
     pairs: 0,
@@ -41,8 +41,8 @@ var MemoryGame = {
                 var img = document.createElement("img");
                 var a = document.createElement("a");
                 
-                img.setAttribute("src","pics/0.png");
-                img.setAttribute("number",(i*MemoryGame.col)+j);
+                img.setAttribute("src","pics/"+MemoryGame.array[(i*MemoryGame.col+j)]+".png");
+                img.className = "hidden";
                 
                 a.setAttribute("href","#");
                 
@@ -69,13 +69,12 @@ var MemoryGame = {
     flipCard: function(e){
     
         var node = e.target;
-        var number = node.getAttribute("number");
         
-        if(!(MemoryGame.flippedArr[0]&&number===MemoryGame.flippedArr[0].getAttribute("number")))
+        if(!(MemoryGame.flippedArr[0]&&node===MemoryGame.flippedArr[0]))
         {
             if(MemoryGame.cardsFlipped < 2)
             {
-                node.src = "pics/"+MemoryGame.array[number]+".png";
+                node.className = "normal";
                 
                 MemoryGame.flippedArr.push(node);
                 MemoryGame.cardsFlipped++;
@@ -112,14 +111,14 @@ var MemoryGame = {
         for(var i = 0;i < 2;i++)
         {
             var node = MemoryGame.flippedArr[i];
-            node.setAttribute("src","pics/0.png");
+            node.className = "hidden";
         }
         
         window.clearTimeout(MemoryGame.timeoutID);
         MemoryGame.timeoutID = null;
         
-        MemoryGame.cardsFlipped = 0;
-        MemoryGame.flippedArr = [];
+        MemoryGame.cardsFlipped -= 2;
+        MemoryGame.flippedArr.splice(0,2);
     },
     
     reset: function(){

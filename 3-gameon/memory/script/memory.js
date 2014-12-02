@@ -47,9 +47,6 @@ var MemoryGame = {
                 
                 a.setAttribute("href","#");
                 
-                a.addEventListener("click",MemoryGame.flipCard);
-                a.addEventListener("keypress",MemoryGame.flipCard);
-                
                 a.appendChild(img);
                 data.appendChild(a);
                 
@@ -59,6 +56,10 @@ var MemoryGame = {
             table.appendChild(tr);
         }
         
+                
+        table.addEventListener("click",MemoryGame.flipCard);
+        table.addEventListener("keypress",MemoryGame.flipCard);
+                
         var button = document.createElement("input");
         button.setAttribute("type","button");
         button.setAttribute("value","Reset");
@@ -75,21 +76,25 @@ var MemoryGame = {
         if(node.nodeName === "A")
         {
             node = node.firstChild;
+            console.log("dis is A");
         }
-        
-        if(!(MemoryGame.flippedArr[0]&&node===MemoryGame.flippedArr[0]))
-        {
-            if(MemoryGame.cardsFlipped < 2&&MemoryGame.checkForComplete(node))
-            {
-                node.className = "normal";
                 
-                MemoryGame.flippedArr.push(node);
-                MemoryGame.cardsFlipped++;
-            }
-            
-            if(MemoryGame.cardsFlipped === 2)
+        if(node.nodeName === "IMG")
+        {
+            if(!(MemoryGame.flippedArr[0]&&node===MemoryGame.flippedArr[0]))
             {
-                MemoryGame.checkMatch();
+                if(MemoryGame.cardsFlipped < 2&&MemoryGame.checkForComplete(node))
+                {
+                    node.className = "normal";
+                    
+                    MemoryGame.flippedArr.push(node);
+                    MemoryGame.cardsFlipped++;
+                }
+                
+                if(MemoryGame.cardsFlipped === 2)       
+                {
+                    MemoryGame.checkMatch();
+                }
             }
         }
     },

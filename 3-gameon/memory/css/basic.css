@@ -1,0 +1,17 @@
+table {
+    margin:0px auto;
+}
+
+#table {
+    width:50%;
+    margin:0px auto;
+}
+
+input {
+    display:block;
+    margin:0px auto;
+}
+
+.text {
+    text-align:center;
+}

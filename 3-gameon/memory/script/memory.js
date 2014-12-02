@@ -7,6 +7,7 @@ var MemoryGame = {
     col: 4,
     cardsFlipped: 0,
     flippedArr: [],
+    completePairs: [],
     pairs: 0,
     timeoutID: null,
     
@@ -47,6 +48,7 @@ var MemoryGame = {
                 a.setAttribute("href","#");
                 
                 a.addEventListener("click",MemoryGame.flipCard);
+                a.addEventListener("keypress",MemoryGame.flipCard);
                 
                 a.appendChild(img);
                 data.appendChild(a);
@@ -70,9 +72,14 @@ var MemoryGame = {
     
         var node = e.target;
         
+        if(node.nodeName === "A")
+        {
+            node = node.firstChild;
+        }
+        
         if(!(MemoryGame.flippedArr[0]&&node===MemoryGame.flippedArr[0]))
         {
-            if(MemoryGame.cardsFlipped < 2)
+            if(MemoryGame.cardsFlipped < 2&&MemoryGame.checkForComplete(node))
             {
                 node.className = "normal";
                 
@@ -82,26 +89,44 @@ var MemoryGame = {
             
             if(MemoryGame.cardsFlipped === 2)
             {
-                if(MemoryGame.flippedArr[0].getAttribute("src") === MemoryGame.flippedArr[1].getAttribute("src"))
-                {
-                    MemoryGame.pairs++;
-                    MemoryGame.cardsFlipped = 0;
-                    MemoryGame.flippedArr = [];
-                    
-                    if(MemoryGame.pairs === (MemoryGame.row*MemoryGame.col)/2)
-                    {
-                        MemoryGame.winningMessage();
-                        var button = document.querySelector("input");
-                        button.setAttribute("value","Play Again?");
-                    }
-                }
-                else
-                {
-                    if(!MemoryGame.timeoutID)
-                    {
-                        MemoryGame.timeoutID = window.setTimeout(MemoryGame.unflipCards,1000);
-                    }
-                }
+                MemoryGame.checkMatch();
+            }
+        }
+    },
+    
+    checkForComplete: function(node){
+        for(var i = 0; i < MemoryGame.completePairs.length;i++)
+        {
+            if(node.getAttribute("src")===MemoryGame.completePairs[i])
+            {
+                return false;
+            }
+        }
+        
+        return true;
+    },
+    
+    checkMatch: function(){
+        
+        if(MemoryGame.flippedArr[0].getAttribute("src") === MemoryGame.flippedArr[1].getAttribute("src"))
+        {
+            MemoryGame.completePairs.push(MemoryGame.flippedArr[0].getAttribute("src"));
+            MemoryGame.pairs++;
+            MemoryGame.cardsFlipped = 0;
+            MemoryGame.flippedArr = [];
+            
+            if(MemoryGame.pairs === (MemoryGame.row*MemoryGame.col)/2)
+            {
+                MemoryGame.winningMessage();
+                var button = document.querySelector("input");
+                button.setAttribute("value","Play Again?");
+            }
+        }
+        else
+        {
+            if(!MemoryGame.timeoutID)
+            {
+                MemoryGame.timeoutID = window.setTimeout(MemoryGame.unflipCards,1000);
             }
         }
     },
@@ -131,6 +156,7 @@ var MemoryGame = {
         MemoryGame.cardsFlipped = 0;
         MemoryGame.pairs = 0;
         MemoryGame.flippedArr = [];
+        MemoryGame.completePairs = [];
         
         if(document.querySelector(".text"))
         {

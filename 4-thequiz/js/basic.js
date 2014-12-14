@@ -1,16 +1,10 @@
-"use stict"
+"use strict";
 
-function quizStart(){
-  var form = document.querySelector("form");
-  
-  var answer = form.elements["answer"];
-  answer.focus();
+function QuizBoard(){
   
   
-  form.onsubmit = function(e){
-      console.log(form.firstChild.nodeValue);
-      return false;
-  }
+  var quiz = new Quiz();
+  quiz.init();
   
 };
 
@@ -18,4 +12,9 @@ function quizStart(){
 
 
 
-window.onload = quizStart();
+window.onload = function(){
+  new QuizBoard();
+};
+
+//<link rel="stylesheet" href="css/basic.css" type="text/css" />
+        

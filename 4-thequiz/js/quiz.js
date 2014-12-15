@@ -2,13 +2,10 @@
 
 function Quiz()
 {
-    var xhr = null;
     var url = "http://vhost3.lnu.se:20080/question/1";
+    var xhr = null;
     var object = null;
-    var p = null;
-    var wrongMessage = null;
     var numberOfGuesses = 0;
-    var answer = null;
   
     this.init = function(){
       
@@ -16,21 +13,22 @@ function Quiz()
       
         var form = document.querySelector("form");
       
-        answer = form.elements["answer"];
+        var answer = form.elements["answer"];
         answer.focus();
         
-        var div = document.createElement("div");
-        p = document.getElementById("question");
-        wrongMessage = document.createElement("p");
+        var div = document.getElementById("main");
+        var p = document.getElementById("question");
+        var message = document.createElement("p");
         p.innerHTML = "";
-        wrongMessage.innerHTML = "";
-        div.appendChild(wrongMessage);
+        message.innerHTML = "";
+        div.appendChild(message);
         document.querySelector("body").appendChild(div);
         
         var a = document.createElement("a");
         var img = document.createElement("img");
-        img.src = "img/refresh.png"
+        img.src = "img/refresh.png";
         a.setAttribute("href","#");
+        img.className = "unactive";
         a.appendChild(img);
         div.appendChild(a);
         
@@ -52,17 +50,20 @@ function Quiz()
                 object = JSON.parse(xhr.responseText);
                 if(object.hasOwnProperty("question"))
                 {
-                    drawQuestion();
+                    drawQuestion(p);
                 }
                 else
                 {
                     numberOfGuesses += 1;
-                    checkIfCorrect();
+                    checkIfCorrect(answer,p,message);
                 }
             }
             else if(xhr.status === 400)
             {
-                wrongMessage.innerHTML = "Det var fel!";
+                message.innerHTML = answer.value+" var fel!";
+                answer.value = null;
+                answer.focus();
+                message.className = "wrong";
                 numberOfGuesses += 1;
             }
         }
@@ -74,11 +75,11 @@ function Quiz()
         xhr.send(null);
     };
 
-    function drawQuestion(){
+    function drawQuestion(p){
         p.innerHTML = object["question"];
     };
     
-    function checkIfCorrect(){
+    function checkIfCorrect(answer,p,message){
         
         if(object.hasOwnProperty("nextURL"))
         {
@@ -88,21 +89,33 @@ function Quiz()
                 answer.focus();
                 xhr.open("GET",object["nextURL"],true);
                 xhr.send(null);
-                wrongMessage.innerHTML = "";
+                message.innerHTML = "Det var korrekt";
+                message.className = "right";
             }
         }
         else
         {
-            wrongMessage.innerHTML = "";
+            message.innerHTML = "";
             p.innerHTML = "Det tog totalt " + numberOfGuesses + " antal gissnignar";
             document.querySelector("form").elements["button"].disabled = true;
             answer.value = null;
             answer.disabled = true;
+            document.querySelector(".unactive").className = "active";
         }
     };
     
     function restart(){
-        console.log("restart engae");  
+        numberOfGuesses = 0;
+        var answer = document.querySelector("form").elements["answer"];
+        var button = document.querySelector("form").elements["button"];
+        answer.disabled = false;
+        button.disabled = false;
+        answer.focus();
+        
+        document.querySelector(".active").className = "unactive";
+        
+        xhr.open("GET",url,true);
+        xhr.send(null);
     };
   
 };

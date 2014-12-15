@@ -1,0 +1,32 @@
+#main {
+    width: 500px;
+    margin:0px auto;
+    text-align:center;
+    border:1px solid black;
+    background-color:#66AA7A;
+}
+
+p.wrong, p.right {
+    text-shadow:1px 1px black;
+    font-size:1.4em;
+}
+
+p.wrong {
+    color:#FF0000;
+}
+
+p.right {
+    color:#00FF00;
+}
+
+img {
+    width:50px;
+    height:50px;
+}
+
+img.unactive {
+    visibility:hidden;
+}
+
+
+

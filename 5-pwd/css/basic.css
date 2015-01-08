@@ -1,0 +1,31 @@
+html {
+    background: url("../img/background.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    margin: 0px 0px;
+}
+
+div {
+    display:block;
+}
+
+img {
+    width:50px;
+    height:50px;
+    margin-left:5px;
+}
+
+#iconhub {
+    height:50px;
+    padding:5px 0px 5px 0px;
+    background-color:red;
+    opacity:0.5;
+    position:absolute;
+    width:100%;
+    bottom:0;
+}

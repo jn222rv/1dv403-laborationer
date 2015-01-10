@@ -10,11 +10,32 @@ body {
     margin: 0px 0px;
 }
 
+.imgBox {
+    background-color:red;
+    padding:10px;
+    float:left;
+    margin:10px;
+}
 
-img {
+.imgBox img {
+    display:block;
+    margin:auto;
+}
+
+#iconhub img {
     width:50px;
     height:50px;
     margin-left:5px;
+}
+
+.topbar img {
+    width:10px;
+    height:10px;
+}
+
+.gif {
+    display:block;
+    background-image:url("../img/load.gif");
 }
 
 p {
@@ -22,10 +43,13 @@ p {
     margin:0px;
 }
 
+.topbar p {
+    display:inline;
+}
+
 .content {
     background-color:yellow;
     width:100%;
-    height:100px;
     overflow-y: scroll;
 }
 
@@ -42,7 +66,6 @@ p {
 }
 
 .appWindow {
-    width:100px;
     position:absolute;
     margin-left:10px;
     margin-top:10px;

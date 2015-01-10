@@ -10,8 +10,8 @@ function Desktop(){
     
     this.init =  function(){
         document.getElementById("imageViewer").addEventListener("click",function(){
-            var myWindow = new Window();
-            myWindow.createWindow();
+            var myApp = new ImageViewer();
+            myApp.createImgWindow();
         });
     }
 }

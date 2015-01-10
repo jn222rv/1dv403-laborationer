@@ -2,34 +2,50 @@
 
 var DESKTOP = DESKTOP||{};
 
-function Window(){
+function Window(width,height){
     
-    this.createWindow = function(){
+    this.appMain = null;
+    this.topbar = null;
+    this.content = null;
+    this.footer = null;
+    this.appTitle = null;
+    this.appIcon = null;
+    this.width = width;
+    this.height = height;
+};
+
+Window.prototype.createWindow = function(text,url){
+    
+        this.appMain = document.createElement("div");
+        this.topbar = document.createElement("div");
+        this.content = document.createElement("div");
+        this.footer = document.createElement("div");
+        this.appTitle = document.createElement("p");
+        this.appIcon = document.createElement("img");
           
-        var appMain = document.createElement("div");
-        var topbar = document.createElement("div");
-        var content = document.createElement("div");
-        var footer = document.createElement("div");
-        var p = document.createElement("p");  
-          
-        p.innerHTML = "Test";
+        this.appMain.style.width = this.width+"px"; 
+        this.appMain.style.height = this.height+"px"; 
+         
+        this.appTitle.innerHTML = text;
         
-        topbar.appendChild(p);
+        this.appIcon.setAttribute("src",url);
         
-        topbar.className = "topbar";
-        content.className = "content";
-        appMain.className = "appWindow";
-        footer.className = "footer";
+        this.topbar.className = "topbar";
+        this.content.className = "content";
+        this.appMain.className = "appWindow";
+        this.footer.className = "footer";
         
-        appMain.appendChild(topbar);
-        appMain.appendChild(content);
-        appMain.appendChild(footer);
+        this.content.style.height = (this.height-40)+"px";
+        
+        this.topbar.appendChild(this.appIcon);
+        this.topbar.appendChild(this.appTitle);
+        this.appMain.appendChild(this.topbar);
+        this.appMain.appendChild(this.content);
+        this.appMain.appendChild(this.footer);
     
         DESKTOP.Main.numberOfWindows += 1;
-        appMain.style.left = (DESKTOP.Main.numberOfWindows*15)+"px";
-        appMain.style.top = (DESKTOP.Main.numberOfWindows*15)+"px";
+        this.appMain.style.left = (DESKTOP.Main.numberOfWindows*15)+"px";
+        this.appMain.style.top = (DESKTOP.Main.numberOfWindows*15)+"px";
         
-        document.querySelector("body").appendChild(appMain);
-        
-    };
+        document.querySelector("body").appendChild(this.appMain);
 };

@@ -12,6 +12,10 @@ function ImageViewer(){
         img.setAttribute("src","img/load.gif");
         img.className = "gif";
         
+        var p = document.createElement("p");
+        p.innerHTML = "Loading"
+        
+        myWindow.footer.appendChild(p);
         myWindow.footer.appendChild(img);
         
         loadImages();

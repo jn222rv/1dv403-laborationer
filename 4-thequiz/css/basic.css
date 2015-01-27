@@ -4,6 +4,12 @@
     text-align:center;
     border:1px solid black;
     background-color:#66AA7A;
+    border-radius: 7px;
+    padding-bottom:35px;
+}
+
+body {
+    background-color:#388E8E;
 }
 
 p.wrong, p.right {
@@ -19,13 +25,24 @@ p.right {
     color:#00FF00;
 }
 
-img {
+p#question {
+    font-size:1.2em;
+    color:#8E388E;
+}
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#main img {
     width:50px;
     height:50px;
 }
 
 img.unactive {
-    visibility:hidden;
+    display:none;
 }
 
 

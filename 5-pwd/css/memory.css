@@ -1,0 +1,50 @@
+
+table {
+    margin:0px auto;
+    background-color:#FFFFFF;
+    margin-bottom:10px;
+    border:3px #B3EE3A outset;
+    border-radius:5px;
+}
+
+input {
+    display:block;
+    margin:0px auto;
+    font-family:"pixel";
+}
+
+.text {
+    text-align:center;
+}
+
+table p {
+    font-size:32px;
+    text-shadow: 1px 1px 2px black, 0 0 1em blue, 0 0 0.1em blue;
+    color:#EE7942;
+    margin-bottom:50px;
+}
+
+table a {
+    display:block;
+    width:100%;
+    height:100%;
+}
+
+img.normal {
+    width:100%;
+    height:100%;
+    opacity:1;
+}
+
+img.hidden {
+    width:100%;
+    height:100%;
+    opacity:0;
+}
+
+td {
+    width:50px;
+    height:50px;
+    background-size: 100% 100%;
+    background-image:url("../img/MemoryPics/0.jpg");
+}

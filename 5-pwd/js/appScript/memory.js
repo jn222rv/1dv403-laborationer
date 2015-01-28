@@ -2,7 +2,7 @@
 
 function MemoryWindow(){
     
-    Window.call(this, 200,300); 
+    Window.call(this, 300,300); 
     
     this.createMemoryWindow();
 }

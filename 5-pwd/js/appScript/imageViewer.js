@@ -4,6 +4,7 @@ function ImageViewerWindow(){
     
     this.pictureWidth = [];
     this.pictureHeight = [];
+    this.pictureUrl = [];
     
     Window.call(this, 400,350); 
     
@@ -18,11 +19,13 @@ ImageViewerWindow.prototype.createImageViewerWindow = function(){
         
         this.loadImages(this);
         
-        var array = this.pictureHeight;
+        var arrayW = this.pictureWidth;
+        var arrayH = this.pictureHeight;
+        var arrayU = this.pictureUrl;
         var self = this;
         
         this.content.addEventListener("click",function(event){
-            self.showPicture(event,array);
+            self.showPicture(event,arrayW,arrayH,arrayU);
         });
 };
 
@@ -49,6 +52,7 @@ ImageViewerWindow.prototype.loadImages = function(myWindow){
                     
                     myWindow.pictureWidth.push(imgArr[i].width);
                     myWindow.pictureHeight.push(imgArr[i].height);
+                    myWindow.pictureUrl.push(imgArr[i].URL);
                     
                     var maxWidth = Math.max.apply(Math, width);
                     var maxHeight = Math.max.apply(Math, height);
@@ -74,17 +78,23 @@ ImageViewerWindow.prototype.loadImages = function(myWindow){
         xhr.send(null);
 };
 
-ImageViewerWindow.prototype.showPicture = function(e,array){
+ImageViewerWindow.prototype.showPicture = function(e,arrayWidth,arrayHeight,arrayUrl){
     
     var node = e.target;
     
-    if(node.nodeName === "IMG" && node.className !== "cross")
+    if(node.nodeName === "IMG")
     {
         var id = node.getAttribute("id");
         //console.log(array[id]);
-        var myWindow = new Window(array[id],array[id]);
+        var myWindow = new Window(arrayWidth[id],arrayHeight[id]);
         myWindow.createWindow("ImageViwer","img/pic2.jpg");
         
+        var url = node.getAttribute("src");
+        var img = document.createElement("img");
+        img.setAttribute("src",arrayUrl[id]);
+        img.setAttribute("width",arrayWidth[id]);
+        img.setAttribute("height",arrayHeight[id]);
+        myWindow.content.appendChild(img);
         
         //console.log(myWindow.appMain);
         myWindow.setFocus();

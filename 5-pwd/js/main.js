@@ -8,7 +8,9 @@ function Desktop(){
     
     this.numberOfWindows = 0;
     this.lastX = 0;
-    this.directionX = 15;
+    this.lastY = 0;
+    this.directionX = 30;
+    this.directionY = 15;
     
     this.init =  function(){
         document.getElementById("imageViewer").addEventListener("click",function(){

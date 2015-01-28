@@ -22,8 +22,8 @@ function Window(width,height){
         this.appTitle = document.createElement("p");
         this.appIcon = document.createElement("img");
           
-        this.appMain.style.width = this.width+"px"; 
-        this.appMain.style.height = this.height+"px"; 
+        //this.appMain.style.width = this.width+"px"; 
+        //this.appMain.style.height = this.height+"px"; 
          
         this.appTitle.innerHTML = text;
         
@@ -45,7 +45,8 @@ function Window(width,height){
         
         this.topbar.appendChild(img);
         
-        this.content.style.height = (this.height-40)+"px";
+        this.content.style.width = this.width+"px"; 
+        this.content.style.height = (this.height)+"px";
         
         this.topbar.appendChild(this.appIcon);
         this.topbar.appendChild(this.appTitle);
@@ -55,11 +56,14 @@ function Window(width,height){
     
         DESKTOP.Main.numberOfWindows += 1;
        
-        if(DESKTOP.Main.lastX+this.height>window.innerHeight||DESKTOP.Main.lastX<0)DESKTOP.Main.directionX*=-1;
         
-        this.appMain.style.left = DESKTOP.Main.numberOfWindows*15+"px";
+        this.appMain.style.left = (DESKTOP.Main.lastY+DESKTOP.Main.directionY)+"px";
         this.appMain.style.top = (DESKTOP.Main.lastX+DESKTOP.Main.directionX)+"px";
         DESKTOP.Main.lastX += DESKTOP.Main.directionX; 
+        DESKTOP.Main.lastY += DESKTOP.Main.directionY; 
+        
+        if(DESKTOP.Main.lastX+this.height>window.innerHeight-100||(DESKTOP.Main.lastX<0+50&&DESKTOP.Main.directionX<0))DESKTOP.Main.directionX*=-1;
+        if(DESKTOP.Main.lastY+this.width>window.innerWidth-100||(DESKTOP.Main.lastY<0+50&&DESKTOP.Main.directionY<0))DESKTOP.Main.directionY*=-1;
         
         document.querySelector("body").appendChild(this.appMain);
            
@@ -75,8 +79,30 @@ function Window(width,height){
             }
         });
         
+        this.appMain.addEventListener("mousedown",function doSomething(e) {
+        	var posx = 0;
+        	var posy = 0;
+        	if (!eg) var eg = window.event;
+        	if (eg.pageX || eg.pageY) 	{
+        		posx = eg.pageX;
+        		posy = eg.pageY;
+        	}
+        	else if (eg.clientX || eg.clientY) 	{
+        		posx = eg.clientX + document.body.scrollLeft
+        			+ document.documentElement.scrollLeft;
+        		posy = eg.clientY + document.body.scrollTop
+        			+ document.documentElement.scrollTop;
+        	}
+        	// posx and posy contain the mouse position relative to the document
+        	// Do something with this information
+        	
+        	console.log(posx);
+        });
+        
         //this.setFocus(); 
     };
+    
+    
     
     this.startLoading = function(){
         

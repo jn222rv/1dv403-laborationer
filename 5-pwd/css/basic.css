@@ -52,15 +52,18 @@ p {
 
 .content {
     background-color:yellow;
-    width:100%;
-    overflow-y: scroll;
+    overflow-y: auto;
+}
+
+.content img {
+    display:block;
 }
 
 .topbar {
     background-color:white;
     width:100%;
     height:20px;
-    border:1px solid red;
+    border-bottom:1px solid red;
 }
 
 .footer {
@@ -76,6 +79,7 @@ p {
 
 .appWindow {
     position:absolute;
+    border:2px solid red;
 }
 
 #focus {
